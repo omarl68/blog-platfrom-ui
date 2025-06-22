@@ -1,0 +1,205 @@
+.admin-user-management-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .new-user-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.filter-section {
+  margin-bottom: 20px;
+
+  .search-field {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.table-container {
+  position: relative;
+  min-height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+
+    .mat-column-firstName {
+      width: 15%;
+    }
+
+    .mat-column-lastName {
+      width: 15%;
+    }
+
+    .mat-column-email {
+      width: 25%;
+    }
+
+    .mat-column-role {
+      width: 15%;
+    }
+
+    .mat-column-isEmailVerified {
+      width: 10%;
+    }
+
+    .mat-column-createdAt {
+      width: 15%;
+    }
+
+    .mat-column-actions {
+      width: 5%;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      align-items: center;
+
+      .role-select {
+        min-width: 120px;
+        margin-right: 5px;
+      }
+
+      button {
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+
+  p {
+    margin-top: 15px;
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .new-user-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+
+    table {
+      min-width: 700px;
+
+      .mat-column-isEmailVerified {
+        display: none;
+      }
+
+      .mat-column-createdAt {
+        display: none;
+      }
+
+      .mat-column-firstName {
+        width: 20%;
+      }
+
+      .mat-column-lastName {
+        width: 20%;
+      }
+
+      .mat-column-email {
+        width: 30%;
+      }
+
+      .mat-column-role {
+        width: 20%;
+      }
+
+      .mat-column-actions {
+        width: 10%;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 2px;
+
+        .role-select {
+          min-width: 100px;
+          margin-right: 0;
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
+} 

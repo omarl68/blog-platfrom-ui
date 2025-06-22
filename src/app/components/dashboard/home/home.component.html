@@ -1,0 +1,103 @@
+<div class="home-container">
+  <div class="welcome-section">
+    <h1>Welcome, {{ currentUser?.firstName }} {{ currentUser?.lastName }}!</h1>
+    <p class="role-badge">{{ userRoleLabel }}</p>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">article</mat-icon>
+          <div class="stat-info">
+            <h3>Total Articles</h3>
+            <p class="stat-number">{{ recentArticles.length }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="canWriteArticles">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">edit</mat-icon>
+          <div class="stat-info">
+            <h3>My Articles</h3>
+            <p class="stat-number">{{ myArticlesCount }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="canManageUsers">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">people</mat-icon>
+          <div class="stat-info">
+            <h3>User Management</h3>
+            <p class="stat-text">Manage users and roles</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="canManageArticles">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">admin_panel_settings</mat-icon>
+          <div class="stat-info">
+            <h3>Article Management</h3>
+            <p class="stat-text">Manage all articles</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="recent-articles-section">
+    <h2>Recent Articles</h2>
+    
+    <div class="articles-grid" *ngIf="!loading && recentArticles.length > 0">
+      <mat-card class="article-card" *ngFor="let article of recentArticles">
+        <mat-card-header>
+          <mat-card-title>{{ article.title }}</mat-card-title>
+          <mat-card-subtitle>
+            By {{ article.authorName }} • {{ article.createdAt | date:'short' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ article.content.substring(0, 100) + '...' }}</p>
+          <div class="article-stats">
+            <span class="stat-item">
+              <mat-icon>visibility</mat-icon>
+              {{ article.views }} views
+            </span>
+            <span class="stat-item">
+              <mat-icon>thumb_up</mat-icon>
+              {{ article.likes }} likes
+            </span>
+            <span class="stat-item">
+              <mat-icon>share</mat-icon>
+              {{ article.shares }} shares
+            </span>
+          </div>
+          <div class="article-tags" *ngIf="article.tags && article.tags.length > 0">
+            <mat-chip *ngFor="let tag of article.tags" size="small">
+              {{ tag }}
+            </mat-chip>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="no-articles" *ngIf="!loading && recentArticles.length === 0">
+      <mat-icon>article</mat-icon>
+      <p>No articles found</p>
+    </div>
+
+    <div class="loading-articles" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading articles...</p>
+    </div>
+  </div>
+</div> 

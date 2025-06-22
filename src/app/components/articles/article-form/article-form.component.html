@@ -1,0 +1,98 @@
+<div class="article-form-container">
+  <div class="header-section">
+    <h1>{{ isEditMode ? 'Edit Article' : 'Create New Article' }}</h1>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="article-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Article Title</mat-label>
+            <input matInput formControlName="title" placeholder="Enter article title">
+            <mat-error *ngIf="articleForm.get('title')?.hasError('required')">
+              Title is required
+            </mat-error>
+            <mat-error *ngIf="articleForm.get('title')?.hasError('minlength')">
+              Title must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="articleForm.get('title')?.hasError('maxlength')">
+              Title cannot exceed 255 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Tags</mat-label>
+            <input matInput formControlName="tags" placeholder="Enter tags separated by commas">
+            <mat-hint>e.g., technology, programming, angular</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row" *ngIf="canPublish()">
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let option of getStatusOptions()" [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Image</mat-label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <mat-hint>Upload an image for your article (optional)</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Content</mat-label>
+            <textarea 
+              matInput 
+              formControlName="content" 
+              placeholder="Write your article content here..." 
+              rows="15"
+              class="content-textarea">
+            </textarea>
+            <mat-error *ngIf="articleForm.get('content')?.hasError('required')">
+              Content is required
+            </mat-error>
+            <mat-error *ngIf="articleForm.get('content')?.hasError('minlength')">
+              Content must be at least 10 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button 
+            mat-button 
+            type="button" 
+            (click)="onCancel()"
+            [disabled]="loading">
+            Cancel
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="articleForm.invalid || loading">
+            <i class="fas fa-spinner fa-spin" *ngIf="loading"></i>
+            <span *ngIf="!loading">{{ isEditMode ? 'Update Article' : 'Create Article' }}</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" *ngIf="loading && isEditMode">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading article...</p>
+  </div>
+</div> 

@@ -1,0 +1,68 @@
+<div class="article-list-container">
+  <div class="article-header">
+    <h2>Articles</h2>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" routerLink="/dashboard/articles/new">
+        <i class="fas fa-plus"></i>
+        New Article
+      </button>
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+            <td mat-cell *matCellDef="let article"> {{ article.title }} </td>
+          </ng-container>
+
+          <!-- Author Column -->
+          <ng-container matColumnDef="authorName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+            <td mat-cell *matCellDef="let article"> {{ article.authorName }} </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let article">
+              <mat-chip [color]="getStatusColor(article.status)" selected>
+                {{ article.status }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <!-- Created Date Column -->
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+            <td mat-cell *matCellDef="let article"> {{ article.createdAt | date:'short' }} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let article">
+              <button mat-icon-button color="primary" (click)="viewArticle(article._id)">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button mat-icon-button color="accent" (click)="editArticle(article._id)" *ngIf="canEditArticle(article)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteArticle(article._id)" *ngIf="canDeleteArticle(article)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

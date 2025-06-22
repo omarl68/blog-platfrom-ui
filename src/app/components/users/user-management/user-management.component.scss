@@ -1,0 +1,141 @@
+.user-management-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-section {
+  margin-bottom: 24px;
+}
+
+.header-section h1 {
+  margin: 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.table-container {
+  position: relative;
+  min-height: 400px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-username {
+  width: 15%;
+}
+
+.mat-column-email {
+  width: 20%;
+}
+
+.mat-column-firstName {
+  width: 15%;
+}
+
+.mat-column-lastName {
+  width: 15%;
+}
+
+.mat-column-role {
+  width: 15%;
+}
+
+.mat-column-createdAt {
+  width: 15%;
+}
+
+.mat-column-actions {
+  width: 5%;
+  text-align: center;
+}
+
+.role-select {
+  width: 120px;
+  margin-right: 8px;
+}
+
+.role-select ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: #666;
+}
+
+.no-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #666;
+}
+
+.no-data mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-data p {
+  margin: 0;
+  font-size: 16px;
+}
+
+mat-chip {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .search-field {
+    max-width: 100%;
+  }
+  
+  .mat-column-firstName,
+  .mat-column-lastName,
+  .mat-column-createdAt {
+    display: none;
+  }
+  
+  .mat-column-username {
+    width: 25%;
+  }
+  
+  .mat-column-email {
+    width: 35%;
+  }
+  
+  .mat-column-role {
+    width: 25%;
+  }
+  
+  .mat-column-actions {
+    width: 15%;
+  }
+  
+  .role-select {
+    width: 100px;
+  }
+} 

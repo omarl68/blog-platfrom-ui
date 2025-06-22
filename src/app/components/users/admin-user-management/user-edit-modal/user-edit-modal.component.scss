@@ -1,0 +1,47 @@
+.user-edit-modal {
+  min-width: 400px;
+  
+  h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .form-row {
+    margin-bottom: 16px;
+    
+    .full-width {
+      width: 100%;
+    }
+  }
+  
+  mat-dialog-content {
+    padding: 20px 0;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  
+  mat-dialog-actions {
+    padding: 16px 0;
+    margin: 0;
+    
+    button {
+      margin-left: 8px;
+      
+      mat-spinner {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 600px) {
+  .user-edit-modal {
+    min-width: 300px;
+    
+    mat-dialog-content {
+      padding: 16px 0;
+    }
+  }
+} 

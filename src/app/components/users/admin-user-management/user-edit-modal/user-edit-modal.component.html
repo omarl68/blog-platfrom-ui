@@ -1,0 +1,70 @@
+<div class="user-edit-modal">
+  <h2 mat-dialog-title>Edit User</h2>
+  
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter first name">
+          <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+            First name is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('firstName')?.hasError('minlength')">
+            First name must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter last name">
+          <mat-error *ngIf="userForm.get('lastName')?.hasError('required')">
+            Last name is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('lastName')?.hasError('minlength')">
+            Last name must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter email address" type="email">
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of userRoles" [value]="role.value">
+              {{ role.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+            Role is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+        Cancel
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid || loading">
+        <i class="fas fa-spinner fa-spin" *ngIf="loading"></i>
+        <span *ngIf="!loading">Save</span>
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div> 
